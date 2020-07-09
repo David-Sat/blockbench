@@ -3,3 +3,9 @@ node_modules/
 data/
 package-lock.json
 .node-*
+log.txt
+rpcchannel.block
+package.json
+driver
+src/kvstore/
+*.o
