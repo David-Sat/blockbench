@@ -77,8 +77,7 @@ int FabricDB::GetTip() {
   string result = exec(cmd.c_str());
   string status = json_field(result, "status");
   //std::cout << "Get tip blk num Result: [" << result << "] status: " << "[" << status << "]" << std::endl;
-  std::cerr << "Get tip blk num Result: [" << result << "] status: " << "[" << status << "]" << std::endl;
-  //comment
+  //uncomment
   if (status == "ok") {
     return stoi(json_field(result, "height"));
   } else {

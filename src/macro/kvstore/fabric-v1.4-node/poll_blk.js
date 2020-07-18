@@ -32,7 +32,7 @@ Promise.resolve().then(()=>{
             result["txns"].push(channel_header.tx_id)
         } else {
             result["status"] = "fail";
-            result["txns"].push(channel_header.tx_id)
+            result["msg"] = tx_filters[index];
         }
     }
     
