@@ -83,6 +83,11 @@ int StatusThread(string dbname, ycsbc::DB *db, double interval,
       vector<string> txs = db->PollTxn(cur_block_height);
       cout << "polled block " << cur_block_height << " : " << txs.size()
            << " txs " << endl;
+      for(std::vector<string>::const_iterator i = txs.begin(); i != txs.end(); ++i){
+        std::cout << *i << ' ';
+      }
+      std::cout << endl;
+
       cur_block_height++;
       long block_time = utils::time_now();
       txlock.lock();
