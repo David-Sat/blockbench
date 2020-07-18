@@ -29,10 +29,6 @@ Promise.resolve().then(()=>{
         var channel_header = block.data.data[index].payload.header.channel_header;
         if (tx_filters[index] === 0) {
             result["txns"].push(channel_header.tx_id)
-        } else {
-            result["status"] = "no";
-            result["txns"] = [];
-            result["txns"].push(channel_header.tx_id)
         }
     }
     
