@@ -20,6 +20,8 @@ def main():
 
     lines = [line.strip().split('\t') for line in open(path)]
 
+    print lines
+
     results = {}
 
     db_index = set() # db name
@@ -31,8 +33,13 @@ def main():
         db_name = line[0]
         db_index.add(db_name)
 
+        print line[1]
+        print os.path.split(line[1])
+
         dir_name, workload = os.path.split(line[1])
         workload = os.path.splitext(workload)[0]
+        print dir_name
+        print workload
 
         num_threads = int(line[2])
         tn_index.add(num_threads)

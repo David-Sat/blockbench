@@ -76,7 +76,7 @@ int FabricDB::GetTip() {
   string cmd = "node fabric-v1.4-node/query_blk_height.js " + orderer + " " + peer;
   string result = exec(cmd.c_str());
   string status = json_field(result, "status");
-  // std::cout << "Get tip blk num Result: [" << result << "] status: " << "[" << status << "]" << std::endl;
+  std::cout << "Get tip blk num Result: [" << result << "] status: " << "[" << status << "]" << std::endl;
   if (status == "ok") {
     return stoi(json_field(result, "height"));
   } else {
