@@ -31,6 +31,7 @@ Promise.resolve().then(()=>{
             result["txns"].push(channel_header.tx_id)
         } else {
             result["status"] = "no";
+            result["txns"] = [];
             result["txns"].push(channel_header.tx_id)
         }
     }
