@@ -93,6 +93,7 @@ vector<string> FabricDB::PollTxn(int block_number) {
   addresses(&orderer, &peer);
   string cmd = "node fabric-v1.4-node/poll_blk.js " + orderer + " " + peer + " " + std::to_string(block_number);
   string result = exec(cmd.c_str());
+  std::cout << "poll_blk.js result: "  << result << std::endl;
   if (json_field(result, "status") == "ok") {
     auto r = list_field(result, "txns");
     return r; 
