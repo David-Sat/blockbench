@@ -79,6 +79,11 @@ vector<string> Fabric::poll_tx(int block_number) {
   addresses(&orderer, &peer);
   string cmd = "node api_adapters/fabric-v1.4-node/poll_blk.js " + orderer + " " + peer + " " + std::to_string(block_number);
   string result = this->exec(cmd.c_str());
+
+  string cmd2 = "node api_adapters/fabric-v1.4-node/poll_metadata.js " + orderer + " " + peer + " " + std::to_string(block_number);
+  string flag = this->exec(cmd2.c_str());
+  std::cout << "poll_metadata.js result: "  << flag << std::endl;
+
   if (json_field(result, "status") == "ok") {
     auto r = list_field(result, "txns");
     // std::cout << "Poll Txns: \n[";

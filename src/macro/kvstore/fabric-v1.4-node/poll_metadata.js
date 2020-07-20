@@ -22,11 +22,13 @@ Promise.resolve().then(()=>{
     return channel.queryBlock(blockNum);
 }).then((block)=>{
     result["status"] = [];
-    result["txns"] = [];
+    //result["txns"] = [];
+    var txs_num = block.data.data.length;
+    result["txs_num"] = [txs_num];
 
     let tx_filters = block.metadata.metadata[2]
     for (var index = 0; index < block.data.data.length; index++) {
-        var channel_header = block.data.data[index].payload.header.channel_header;
+        //var channel_header = block.data.data[index].payload.header.channel_header;
         result["status"].push(tx_filters[index])
         //result["txns"].push(channel_header.tx_id)
     }
