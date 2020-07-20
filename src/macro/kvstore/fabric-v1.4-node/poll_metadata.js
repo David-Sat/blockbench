@@ -21,15 +21,14 @@ Promise.resolve().then(()=>{
     channel = result.channel;
     return channel.queryBlock(blockNum);
 }).then((block)=>{
-    result["status"] = "ok";
+    result["status"] = [];
     result["txns"] = [];
 
     let tx_filters = block.metadata.metadata[2]
     for (var index = 0; index < block.data.data.length; index++) {
         var channel_header = block.data.data[index].payload.header.channel_header;
-        if (tx_filters[index] === 0) {
-            result["txns"].push(channel_header.tx_id)
-        }
+        result["status"].push(tx_filters[index])
+        result["txns"].push(channel_header.tx_id)
     }
     
     console.log(result)
