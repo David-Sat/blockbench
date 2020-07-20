@@ -28,7 +28,7 @@ Promise.resolve().then(()=>{
     for (var index = 0; index < block.data.data.length; index++) {
         var channel_header = block.data.data[index].payload.header.channel_header;
         result["status"].push(tx_filters[index])
-        result["txns"].push(channel_header.tx_id)
+        //result["txns"].push(channel_header.tx_id)
     }
     
     console.log(result)

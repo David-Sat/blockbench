@@ -96,7 +96,7 @@ vector<string> FabricDB::PollTxn(int block_number) {
   //std::cout << "poll_blk.js result: "  << result << std::endl;
   //uncomment
   string cmd2 = "node fabric-v1.4-node/poll_metadata.js " + orderer + " " + peer + " " + std::to_string(block_number);
-  string flag = exec(cmd.c_str());
+  string flag = exec(cmd2.c_str());
   std::cout << "poll_metadata.js result: "  << flag << std::endl;
   //comment
   if (json_field(result, "status") == "ok") {
