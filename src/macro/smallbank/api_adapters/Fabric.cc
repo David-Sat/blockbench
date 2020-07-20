@@ -82,7 +82,10 @@ vector<string> Fabric::poll_tx(int block_number) {
 
   string cmd2 = "node api_adapters/fabric-v1.4-node/poll_metadata.js " + orderer + " " + peer + " " + std::to_string(block_number);
   string flag = this->exec(cmd2.c_str());
-  std::cout << "poll_metadata.js result: "  << flag << std::endl;
+  //std::cout << "poll_metadata.js result: "  << flag << std::endl;
+  auto txs = list_field(flag, "status");
+  std::cout << "Successful: " << count(txs.begin(), txs.end(), 0) << " ENDORSE: " << count(txs.begin(), txs.end(), 10) 
+    << " MVCC: " << count(txs.begin(), txs.end(), 11) << " PHANTOM: " << count(txs.begin(), txs.end(), 12) << " SUM: ";
 
   if (json_field(result, "status") == "ok") {
     auto r = list_field(result, "txns");
