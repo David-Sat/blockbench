@@ -26,7 +26,7 @@ Promise.resolve().then(()=>{
     result["MVCC"] = [];
     result["PHANTOM"] = [];
     var txs_num = block.data.data.length;
-    result["txs_num"] = [txs_num];
+    result["txs_num"] = txs_num;
 
     let tx_filters = block.metadata.metadata[2]
     for (var index = 0; index < block.data.data.length; index++) {
@@ -38,10 +38,10 @@ Promise.resolve().then(()=>{
             case 10:
                 result["ENDORSEMENT"].push(channel_header.tx_id)
                 break;
-            case 0:
+            case 11:
                 result["MVCC"].push(channel_header.tx_id)
                 break;
-            case 10:
+            case 12:
                 result["PHANTOM"].push(channel_header.tx_id)
                 break;
         }
