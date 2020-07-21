@@ -25,10 +25,8 @@ Promise.resolve().then(()=>{
     result["ENDORSEMENT"] = [];
     result["MVCC"] = [];
     result["PHANTOM"] = [];
-    result["txs_sum"] = [];
-    var txs_sum = block.data.data.length;
-    //result["txs_sum"] = txs_sum;
-    result["txs_sum"].push(txs_sum)
+    //var txs_sum = block.data.data.length;
+
 
     let tx_filters = block.metadata.metadata[2]
     for (var index = 0; index < block.data.data.length; index++) {

@@ -90,10 +90,10 @@ vector<string> Fabric::poll_tx(int block_number) {
   auto endorsement = list_field(flag, "ENDORSEMENT");
   auto mvcc = list_field(flag, "MVCC");
   auto phantom = list_field(flag, "PHANTOM");
+  auto txs_sum = list_field(flag, "txs_sum");
 
   std::cout << "Successful: " << valid.size() << " ENDORSEMENT: " << endorsement.size() 
-    << " MVCC: " << mvcc.size() << " PHANTOM: " << phantom.size() 
-    << " SUM: " << json_field(flag, "txs_sum") << std::endl;
+    << " MVCC: " << mvcc.size() << " PHANTOM: " << phantom.size() << std::endl;
 
   
   if (json_field(result, "status") == "ok") {
