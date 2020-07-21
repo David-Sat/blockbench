@@ -1,0 +1,57 @@
+Make sure to deploy ycsb chaincode via fabric-v1.4-node/deploy_kv.sh
+Current TIP = 1
+Successful: 1 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 1 : 1 txs 
+In the last 2s, tx count = 0 latency = 0 outstanding request = 32
+Successful: 16 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 2 : 16 txs 
+Successful: 16 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 3 : 16 txs 
+Successful: 16 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 4 : 16 txs 
+In the last 2s, tx count = 48 latency = 5731.63 outstanding request = 112
+Successful: 16 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 5 : 16 txs 
+Successful: 16 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 6 : 16 txs 
+Successful: 16 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 7 : 16 txs 
+Successful: 16 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 8 : 16 txs 
+Successful: 16 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 9 : 16 txs 
+Successful: 16 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 10 : 16 txs 
+Successful: 16 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 11 : 16 txs 
+Successful: 16 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 12 : 16 txs 
+In the last 2s, tx count = 128 latency = 33089.2 outstanding request = 256
+Successful: 16 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 13 : 16 txs 
+Successful: 16 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 14 : 16 txs 
+Successful: 15 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 15 : 15 txs 
+Successful: 1 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 16 : 1 txs 
+Successful: 16 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 17 : 16 txs 
+Successful: 16 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 18 : 16 txs 
+Successful: 16 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 19 : 16 txs 
+Successful: 16 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 20 : 16 txs 
+Successful: 16 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 21 : 16 txs 
+Successful: 15 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 22 : 15 txs 
+Successful: 1 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 23 : 1 txs 
+Successful: 14 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 24 : 14 txs 
+Successful: 2 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 25 : 2 txs 
+Successful: 13 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 26 : 13 txs 
