@@ -1,0 +1,59 @@
+Make sure to call deploy.sh manually at the server side.
+Current TIP = 2
+In the last 2s, tx count = 0 latency = 0 outstanding request = 0
+Successful: 4 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 2 : 4 txs 
+In the last 2s, tx count = 4 latency = 70.8759 outstanding request = 8
+Successful: 1 ENDORSEMENT: 0 MVCC: 3 PHANTOM: 0
+polled block 3 : 1 txs 
+Successful: 1 ENDORSEMENT: 0 MVCC: 3 PHANTOM: 0
+polled block 4 : 1 txs 
+Successful: 4 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 5 : 4 txs 
+In the last 2s, tx count = 6 latency = 225.905 outstanding request = 30
+Successful: 1 ENDORSEMENT: 0 MVCC: 3 PHANTOM: 0
+polled block 6 : 1 txs 
+Successful: 4 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 7 : 4 txs 
+Successful: 4 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 8 : 4 txs 
+Successful: 1 ENDORSEMENT: 0 MVCC: 3 PHANTOM: 0
+polled block 9 : 1 txs 
+Successful: 1 ENDORSEMENT: 0 MVCC: 3 PHANTOM: 0
+polled block 10 : 1 txs 
+Successful: 4 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 11 : 4 txs 
+Successful: 1 ENDORSEMENT: 0 MVCC: 3 PHANTOM: 0
+polled block 12 : 1 txs 
+In the last 2s, tx count = 16 latency = 1102.06 outstanding request = 74
+Successful: 4 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 13 : 4 txs 
+Successful: 1 ENDORSEMENT: 0 MVCC: 3 PHANTOM: 0
+polled block 14 : 1 txs 
+Successful: 1 ENDORSEMENT: 0 MVCC: 3 PHANTOM: 0
+polled block 15 : 1 txs 
+Successful: 1 ENDORSEMENT: 0 MVCC: 3 PHANTOM: 0
+polled block 16 : 1 txs 
+Successful: 1 ENDORSEMENT: 0 MVCC: 3 PHANTOM: 0
+polled block 17 : 1 txs 
+Successful: 1 ENDORSEMENT: 0 MVCC: 3 PHANTOM: 0
+polled block 18 : 1 txs 
+Successful: 1 ENDORSEMENT: 0 MVCC: 3 PHANTOM: 0
+polled block 19 : 1 txs 
+Successful: 4 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 20 : 4 txs 
+Successful: 4 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 21 : 4 txs 
+Successful: 4 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 22 : 4 txs 
+Successful: 1 ENDORSEMENT: 0 MVCC: 3 PHANTOM: 0
+polled block 23 : 1 txs 
+Successful: 4 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 24 : 4 txs 
+Successful: 4 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 25 : 4 txs 
+Successful: 4 ENDORSEMENT: 0 MVCC: 0 PHANTOM: 0
+polled block 26 : 4 txs 
+Successful: 1 ENDORSEMENT: 0 MVCC: 3 PHANTOM: 0
+polled block 27 : 1 txs 
+In the last 2s, tx count = 36 latency = 5296.52 outstanding request = 162
