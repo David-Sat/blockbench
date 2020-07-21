@@ -21,16 +21,30 @@ Promise.resolve().then(()=>{
     channel = result.channel;
     return channel.queryBlock(blockNum);
 }).then((block)=>{
-    result["TxVal"] = [];
-    //result["txns"] = [];
+    result["VALID"] = [];
+    result["ENDORS"] = [];
+    result["MVCC"] = [];
+    result["PHANTOM"] = [];
     var txs_num = block.data.data.length;
     result["txs_num"] = [txs_num];
 
     let tx_filters = block.metadata.metadata[2]
     for (var index = 0; index < block.data.data.length; index++) {
-        //var channel_header = block.data.data[index].payload.header.channel_header;
-        result["TxVal"].push(tx_filters[index])
-        //result["txns"].push(channel_header.tx_id)
+        var channel_header = block.data.data[index].payload.header.channel_header;
+        switch(tx_filters[index]) {
+            case 0:
+                result["VALID"].push(channel_header.tx_id)
+                break;
+            case 10:
+                result["ENDORSEMENT"].push(channel_header.tx_id)
+                break;
+            case 0:
+                result["MVCC"].push(channel_header.tx_id)
+                break;
+            case 10:
+                result["PHANTOM"].push(channel_header.tx_id)
+                break;
+        }
     }
     
     console.log(result)
