@@ -85,12 +85,16 @@ vector<string> Fabric::poll_tx(int block_number) {
   // console output of transaction validation codes
   string cmd2 = "node api_adapters/fabric-v1.4-node/poll_metadata.js " + orderer + " " + peer + " " + std::to_string(block_number);
   string flag = this->exec(cmd2.c_str());
-  std::cout << "TxValidationCodes: "  << flag << std::endl;
 
-  //auto txs = list_field(flag, "TxVal");
-  //std::cout << "Successful: " << count(txs.begin(), txs.end(), 0) << " ENDORSE: " << count(txs.begin(), txs.end(), 10) 
-  //  << " MVCC: " << count(txs.begin(), txs.end(), 11) << " PHANTOM: " << count(txs.begin(), txs.end(), 12) << " SUM: ";
+  auto valid = list_field(flag, "VALID");
+  auto endorsement = list_field(flag, "ENDORSEMENT");
+  auto mvcc = list_field(flag, "MVCC");
+  auto phantom = list_field(flag, "PHANTOM");
 
+  std::cout << "Successful: " << valid.size() << " ENDORSEMENT: " << endorsement.size() 
+    << " MVCC: " << mvcc.size() << " PHANTOM: " << phantom.size() << " SUM: " << json_field(flag, "txs_num");
+
+  
   if (json_field(result, "status") == "ok") {
     auto r = list_field(result, "txns");
     // std::cout << "Poll Txns: \n[";
