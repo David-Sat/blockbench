@@ -93,12 +93,21 @@ vector<string> FabricDB::PollTxn(int block_number) {
   addresses(&orderer, &peer);
   string cmd = "node fabric-v1.4-node/poll_blk.js " + orderer + " " + peer + " " + std::to_string(block_number);
   string result = exec(cmd.c_str());
-  //std::cout << "poll_blk.js result: "  << result << std::endl;
-  //uncomment
+  
+  // console output of transaction validation codes
   string cmd2 = "node fabric-v1.4-node/poll_metadata.js " + orderer + " " + peer + " " + std::to_string(block_number);
   string flag = exec(cmd2.c_str());
-  std::cout << "TxValidationCodes: "  << flag << std::endl;
-  //comment
+
+  auto valid = list_field(flag, "VALID");
+  auto endorsement = list_field(flag, "ENDORSEMENT");
+  auto mvcc = list_field(flag, "MVCC");
+  auto phantom = list_field(flag, "PHANTOM");
+  auto txs_sum = list_field(flag, "txs_sum");
+
+  std::cout << "Successful: " << valid.size() << " ENDORSEMENT: " << endorsement.size() 
+    << " MVCC: " << mvcc.size() << " PHANTOM: " << phantom.size() << std::endl;
+
+    
   if (json_field(result, "status") == "ok") {
     auto r = list_field(result, "txns");
     return r; 
