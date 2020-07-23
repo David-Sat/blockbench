@@ -7,5 +7,4 @@ log.txt
 rpcchannel.block
 package.json
 driver
-src/kvstore/
 *.o
