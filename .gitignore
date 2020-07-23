@@ -8,3 +8,4 @@ rpcchannel.block
 package.json
 driver
 *.o
+src/kvstore/
