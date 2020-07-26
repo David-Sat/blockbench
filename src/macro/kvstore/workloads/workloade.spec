@@ -22,5 +22,5 @@ updateproportion=0.34
 scanproportion=0
 insertproportion=0.32
 
-requestdistribution=latest
+requestdistribution=zipfian
 
