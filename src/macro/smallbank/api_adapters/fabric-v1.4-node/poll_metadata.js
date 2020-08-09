@@ -27,7 +27,6 @@ Promise.resolve().then(()=>{
     result["PHANTOM"] = [];
     //var txs_sum = block.data.data.length;
 
-
     let tx_filters = block.metadata.metadata[2]
     for (var index = 0; index < block.data.data.length; index++) {
         var channel_header = block.data.data[index].payload.header.channel_header;
