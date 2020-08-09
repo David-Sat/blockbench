@@ -9,6 +9,7 @@
 #ifndef YCSB_C_CORE_WORKLOAD_H_
 #define YCSB_C_CORE_WORKLOAD_H_
 
+#include <iostream>
 #include <vector>
 #include <string>
 #include "db.h"
@@ -17,6 +18,7 @@
 #include "discrete_generator.h"
 #include "counter_generator.h"
 #include "utils.h"
+
 
 namespace ycsbc {
 
