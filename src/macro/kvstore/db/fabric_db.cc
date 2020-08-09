@@ -44,7 +44,8 @@ int FabricDB::Update(const string &table, const string &key,
     cmd = "node fabric-v1.4-node/invoke_kv.js "  + orderer + " " + peer;
     cmd += " write " + key + " " + val;
   }
-  std::cout << "update cmd: " << cmd << std::endl;
+  //std::cout << "update cmd: " << cmd << std::endl;
+  //uncomment
   std::string result = exec(cmd.c_str());
   if (json_field(result, "status") != "ok") {
     return DB::kErrorNoData;
