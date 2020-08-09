@@ -9,7 +9,6 @@
 #ifndef YCSB_C_CORE_WORKLOAD_H_
 #define YCSB_C_CORE_WORKLOAD_H_
 
-#include <iostream>
 #include <vector>
 #include <string>
 #include "db.h"
@@ -198,8 +197,6 @@ inline std::string CoreWorkload::NextTransactionKey() {
   do {
     key_num = key_chooser_->Next();
   } while (key_num > insert_key_sequence_.Last());
-  std::cout << "update cmd: " << key_num << std::endl;
-  //comment
   return BuildKeyName(key_num);
 }
 
