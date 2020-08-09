@@ -45,6 +45,7 @@ int FabricDB::Update(const string &table, const string &key,
     cmd += " write " + key + " " + val;
     std::cout << cmd << std::endl;
   }
+  std::cout << cmd << std::endl;
   std::string result = exec(cmd.c_str());
   if (json_field(result, "status") != "ok") {
     return DB::kErrorNoData;
