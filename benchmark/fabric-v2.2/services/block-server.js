@@ -66,6 +66,12 @@ async function getChannel(channelName) {
 getChannel(channelName).then((network)=>{
     const listener = async (event) => {
         try {
+            result["VALID"] = [];
+            result["ENDORSEMENT"] = [];
+            result["MVCC"] = [];
+            result["PHANTOM"] = [];
+            var txs_sum = block.data.data.length;
+            
             height = Number(event.blockNumber) + 1;
             const blkNum = "" + event.blockNumber; //conver to str
             const block = event.blockData;
@@ -73,11 +79,28 @@ getChannel(channelName).then((network)=>{
             let tx_filters = block.metadata.metadata[2]
             for (var index = 0; index < block.data.data.length; index++) {
                 var channel_header = block.data.data[index].payload.header.channel_header;
-                if (tx_filters[index] === 0) {
-                    blkTxns[blkNum].push(channel_header.tx_id)
+                switch(tx_filters[index]) {
+                    case 0:
+                        result["VALID"].push(channel_header.tx_id)
+                        break;
+                    case 10:
+                        result["ENDORSEMENT"].push(channel_header.tx_id)
+                        break;
+                    case 11:
+                        result["MVCC"].push(channel_header.tx_id)
+                        break;
+                    case 12:
+                        result["PHANTOM"].push(channel_header.tx_id)
+                        break;
                 }
+
+                /*if (tx_filters[index] === 0) {
+                    blkTxns[blkNum].push(channel_header.tx_id)
+                } */
             }
-            console.log(`Block ${blkNum} has txns [${blkTxns[blkNum]}]. `);
+            console.log(`Block ${blkNum} has TXSUM=${txs_sum} VALID=${result["VALID"].length}, ENDORSEMENT=${result["ENDORSEMENT"].length}, MVCC=${result["MVCC"].length}, PHANTOM=${result["PHANTOM"].length} `);
+
+            //console.log(`Block ${blkNum} has txns [${blkTxns[blkNum]}]. `);
 
         } catch (error) {
             console.error(`Failed to listen for blocks: ${error}`);
