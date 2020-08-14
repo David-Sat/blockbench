@@ -3,9 +3,11 @@ node_modules/
 data/
 package-lock.json
 .node-*
+msp/
+vendor/
+*log*
 log.txt
-rpcchannel.block
-package.json
+*vscode*
 driver
 *.o
-src/kvstore/
+tmp
