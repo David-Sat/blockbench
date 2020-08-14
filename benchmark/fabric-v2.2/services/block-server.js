@@ -73,7 +73,6 @@ getChannel(channelName).then((network)=>{
             let tx_filters = block.metadata.metadata[2]
 
             var result = new Object;
-            result["VALID"] = [];
             result["ENDORSEMENT"] = [];
             result["MVCC"] = [];
             result["PHANTOM"] = [];
@@ -83,7 +82,7 @@ getChannel(channelName).then((network)=>{
                 var channel_header = block.data.data[index].payload.header.channel_header;
                 switch(tx_filters[index]) {
                     case 0:
-                        result["VALID"].push(channel_header.tx_id)
+                        blkTxns[blkNum].push(channel_header.tx_id)
                         break;
                     case 10:
                         result["ENDORSEMENT"].push(channel_header.tx_id)
@@ -100,7 +99,7 @@ getChannel(channelName).then((network)=>{
                     blkTxns[blkNum].push(channel_header.tx_id)
                 } */
             }
-            console.log(`Block ${blkNum} has TXSUM=${txs_sum} VALID=${result["VALID"].length}, ENDORSEMENT=${result["ENDORSEMENT"].length}, MVCC=${result["MVCC"].length}, PHANTOM=${result["PHANTOM"].length} `);
+            console.log(`Block ${blkNum} has TXSUM=${txs_sum} VALID=${blkTxns[blkNum].length}, ENDORSEMENT=${result["ENDORSEMENT"].length}, MVCC=${result["MVCC"].length}, PHANTOM=${result["PHANTOM"].length} `);
 
             //console.log(`Block ${blkNum} has txns [${blkTxns[blkNum]}]. `);
 
