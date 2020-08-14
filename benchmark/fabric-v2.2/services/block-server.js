@@ -66,6 +66,12 @@ async function getChannel(channelName) {
 getChannel(channelName).then((network)=>{
     const listener = async (event) => {
         try {
+            height = Number(event.blockNumber) + 1;
+            const blkNum = "" + event.blockNumber; //conver to str
+            const block = event.blockData;
+            blkTxns[blkNum] = [];
+            let tx_filters = block.metadata.metadata[2]
+
             var result = new Object;
             result["VALID"] = [];
             result["ENDORSEMENT"] = [];
@@ -73,11 +79,6 @@ getChannel(channelName).then((network)=>{
             result["PHANTOM"] = [];
             var txs_sum = block.data.data.length;
 
-            height = Number(event.blockNumber) + 1;
-            const blkNum = "" + event.blockNumber; //conver to str
-            const block = event.blockData;
-            blkTxns[blkNum] = [];
-            let tx_filters = block.metadata.metadata[2]
             for (var index = 0; index < block.data.data.length; index++) {
                 var channel_header = block.data.data[index].payload.header.channel_header;
                 switch(tx_filters[index]) {
