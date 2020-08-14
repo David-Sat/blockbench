@@ -66,12 +66,13 @@ async function getChannel(channelName) {
 getChannel(channelName).then((network)=>{
     const listener = async (event) => {
         try {
+            var result = new Object;
             result["VALID"] = [];
             result["ENDORSEMENT"] = [];
             result["MVCC"] = [];
             result["PHANTOM"] = [];
             var txs_sum = block.data.data.length;
-            
+
             height = Number(event.blockNumber) + 1;
             const blkNum = "" + event.blockNumber; //conver to str
             const block = event.blockData;
