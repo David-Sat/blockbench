@@ -24,7 +24,7 @@ const channelName = process.argv[2];
 const port = Number(process.argv[3]);
 var blkTxns = {};
 var height = 0;
-var result = new Object;
+var result = {};
 
 async function getChannel(channelName) {
     try {
