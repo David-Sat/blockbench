@@ -128,23 +128,23 @@ getChannel(channelName).then((network)=>{
     });
 
     app.get("/valid", (req, res) => { 
-        const valid = blkTxns[blkNum].length;
-        res.json({"status": "0", "VALID": "" + valid});
+        const valid = blkTxns.length;
+        res.json({"status": "0", "VALID": valid});
     });
 
     app.get("/endorsement", (req, res) => { 
         const endorsement = result["ENDORSEMENT"].length;
-        res.json({"status": "0", "ENDORSEMENT": "" + endorsement});
+        res.json({"status": "0", "ENDORSEMENT": endorsement});
     });
 
     app.get("/mvcc", (req, res) => { 
         const mvcc = result["MVCC"].length;
-        res.json({"status": "0", "MVCC": "" + mvcc});
+        res.json({"status": "0", "MVCC": mvcc});
     });
 
     app.get("/phantom", (req, res) => { 
         const phantom = result["PHANTOM"].length;
-        res.json({"status": "0", "PHANTOM": "" + phantom});
+        res.json({"status": "0", "PHANTOM": phantom});
     });
 
 }).catch((error)=>{
