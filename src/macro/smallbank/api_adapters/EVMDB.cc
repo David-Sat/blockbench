@@ -19,6 +19,11 @@ vector<string> EVMDB::poll_tx(int block_number) {
   return poll_txs_by_block_number(endpoint_, block_number); 
 }
 
+vector<string> EVMDB::poll_tx_codes(int block_number){
+  std::vector<std::string> ret;
+  return ret;
+}
+
 int EVMDB::get_tip_block_number(){
   return decode_hex(get_json_field(
       send_jsonrpc_request(endpoint_, REQUEST_HEADERS, GET_BLOCKNUMBER),

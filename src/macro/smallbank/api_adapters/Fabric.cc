@@ -111,6 +111,10 @@ vector<string> Fabric::poll_tx(int block_number) {
   }
 }
 
+vector<string> Fabric::poll_tx_codes(int block_number) {
+  return vector<string>();
+}
+
 int Fabric::get_tip_block_number(){
   string orderer, peer;
   addresses(&orderer, &peer);

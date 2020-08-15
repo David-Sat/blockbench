@@ -52,6 +52,12 @@ vector<string> SmallBank::poll_tx(int block_number) {
   return find_tx(get(request).body);
 }
 
+vector<string> SmallBank::poll_tx_codes(int block_number) {
+  //Placeholder
+  string request = endpoint_.substr(0,endpoint_.find("/chaincode"))+BLOCK_END_POINT+"/"+std::to_string(block_number);
+  return find_tx(get(request).body);
+}
+
 int SmallBank::get_tip_block_number(){
   string request = endpoint_.substr(0,endpoint_.find("/chaincode"))+CHAIN_END_POINT;
   return find_tip(get(request).body);
