@@ -102,8 +102,8 @@ std::vector<std::string> FabricV2::poll_tx_codes(int block_number) {
     // std::cout << "Block " << block_number << " has txns: " << std::endl;
     for (auto i = txns.begin(); i != txns.end(); ++i) {
       // remove the surrounding "" and the last whitespace
-      std::string trimed = (*i).substr(1, i->length()-2); 
-      trimmedTxns.push_back(trimed);
+      std::string trimmed = (*i); 
+      trimmedTxns.push_back(trimmed);
       // std::cout << "\t[" << trimed << "]" << std::endl;
     }
     return trimmedTxns;
