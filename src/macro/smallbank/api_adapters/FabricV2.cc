@@ -73,12 +73,12 @@ std::vector<std::string> FabricV2::poll_tx(int block_number) {
   } else {
     std::vector<std::string> txns = get_list_field(r, "txns");
     std::vector<std::string> trimedTxns;
-    std::cout << "Block " << block_number << " has txns: " << std::endl;
+    // std::cout << "Block " << block_number << " has txns: " << std::endl;
     for (auto i = txns.begin(); i != txns.end(); ++i) {
       // remove the surrounding "" and the last whitespace
       std::string trimed = (*i).substr(1, i->length()-2); 
       trimedTxns.push_back(trimed);
-      std::cout << "\t[" << trimed << "]" << std::endl;
+      // std::cout << "\t[" << trimed << "]" << std::endl;
     }
     return trimedTxns;
   }
@@ -136,6 +136,9 @@ void FabricV2::InvokeWithOneArg(std::string funcName, std::string arg) {
   std::string writeReq(buff);
   std::string addr = this->randomTxnServiceAddr();
 
+  std::cout << "writeReq1 " << writeReq << std::endl;
+  //comment
+
   auto r = RestClient::post(addr + INVOKE_END_POINT, 
                             REQUEST_HEADERS,
                             writeReq).body;
@@ -150,6 +153,9 @@ void FabricV2::InvokeWithTwoArgs(std::string funcName, std::string arg1, std::st
 
   std::sprintf(buff, COMMAND_TEMPLATE, funcName.c_str(), arg1.c_str(), arg2.c_str());
   std::string writeReq(buff);
+
+  std::cout << "writeReq2 " << writeReq << std::endl;
+  //comment
 
   auto r = RestClient::post(addr + INVOKE_END_POINT, 
                             REQUEST_HEADERS,
@@ -166,6 +172,9 @@ void FabricV2::InvokeWithThreeArgs(std::string funcName, std::string arg1, std::
 
   std::sprintf(buff, COMMAND_TEMPLATE, funcName.c_str(), arg1.c_str(), arg2.c_str(), arg3.c_str());
   std::string writeReq(buff);
+
+  std::cout << "writeReq3 " << writeReq << std::endl;
+  //comment
 
   auto r = RestClient::post(addr + INVOKE_END_POINT, 
                             REQUEST_HEADERS,
