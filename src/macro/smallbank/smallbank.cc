@@ -89,19 +89,27 @@ int StatusThread(DB* sb, string dbname, string endpoint, double interval, int st
   while(true){
     start_time = time_now(); 
     int tip = sb->get_tip_block_number(); 
+    int val = 0;
+    int end = 0;
+    int mvcc = 0;
+    int pha = 0;
     if (tip==-1) // fail
       sleep(interval); 
     while (cur_block_height + confirm_duration <= tip) {      
       vector<string> txs = sb->poll_tx(cur_block_height); 
 
       vector<string> txcodes = sb->poll_tx_codes(cur_block_height);
+      val += std::stoi(txcodes[0]);
+      end += std::stoi(txcodes[10]);
+      mvcc += std::stoi(txcodes[11]);
+      pha += std::stoi(txcodes[12]);
 
       cout << "polled block " << cur_block_height << " : " << txs.size() 
            << " txs; " 
            << "VALID: " << txcodes[0] << ", "
            << "ENDORSEMENT: " << txcodes[10] << ", "
            << "MVCC: " << txcodes[11] << ", "
-           << "PHANTOM: " << txcodes[12] << ", "
+           << "PHANTOM: " << txcodes[12]
            << endl; 
       cur_block_height++;           
       long block_time = time_now(); 
@@ -121,7 +129,12 @@ int StatusThread(DB* sb, string dbname, string endpoint, double interval, int st
     }
     cout << "In the last "<< interval <<"s, tx count = " << txcount
          << " latency = " << latency/1000000000.0 
-        << " outstanding request = " << pendingtx.size() << endl;  
+         << " outstanding request = " << pendingtx.size() 
+        << "V: " << val << ", "
+        << "E: " << end << ", "
+        << "M: " << mvcc << ", "
+        << "P: " << pha
+        << endl;  
     txcount = 0; 
     latency = 0; 
 
