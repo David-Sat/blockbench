@@ -98,9 +98,10 @@ int StatusThread(DB* sb, string dbname, string endpoint, double interval, int st
 
       cout << "polled block " << cur_block_height << " : " << txs.size() 
            << " txs; " 
-           << "ENDORSEMENT: " << txcodes[10]
-           << "MVCC: " << txcodes[11]
-           << "PHANTOM: " << txcodes[12]
+           << "VALID: " << txcodes[0] << ", "
+           << "ENDORSEMENT: " << txcodes[10] << ", "
+           << "MVCC: " << txcodes[11] << ", "
+           << "PHANTOM: " << txcodes[12] << ", "
            << endl; 
       cur_block_height++;           
       long block_time = time_now(); 
