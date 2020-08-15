@@ -136,9 +136,6 @@ void FabricV2::InvokeWithOneArg(std::string funcName, std::string arg) {
   std::string writeReq(buff);
   std::string addr = this->randomTxnServiceAddr();
 
-  std::cout << "writeReq1 " << writeReq << std::endl;
-  //comment
-
   auto r = RestClient::post(addr + INVOKE_END_POINT, 
                             REQUEST_HEADERS,
                             writeReq).body;
@@ -153,9 +150,6 @@ void FabricV2::InvokeWithTwoArgs(std::string funcName, std::string arg1, std::st
 
   std::sprintf(buff, COMMAND_TEMPLATE, funcName.c_str(), arg1.c_str(), arg2.c_str());
   std::string writeReq(buff);
-
-  std::cout << "writeReq2 " << writeReq << std::endl;
-  //comment
 
   auto r = RestClient::post(addr + INVOKE_END_POINT, 
                             REQUEST_HEADERS,
@@ -172,9 +166,6 @@ void FabricV2::InvokeWithThreeArgs(std::string funcName, std::string arg1, std::
 
   std::sprintf(buff, COMMAND_TEMPLATE, funcName.c_str(), arg1.c_str(), arg2.c_str(), arg3.c_str());
   std::string writeReq(buff);
-
-  std::cout << "writeReq3 " << writeReq << std::endl;
-  //comment
 
   auto r = RestClient::post(addr + INVOKE_END_POINT, 
                             REQUEST_HEADERS,

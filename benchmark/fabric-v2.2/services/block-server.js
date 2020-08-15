@@ -24,6 +24,7 @@ const channelName = process.argv[2];
 const port = Number(process.argv[3]);
 var blkTxns = {};
 var height = 0;
+var result = new Object;
 
 async function getChannel(channelName) {
     try {
@@ -72,7 +73,6 @@ getChannel(channelName).then((network)=>{
             blkTxns[blkNum] = [];
             let tx_filters = block.metadata.metadata[2]
 
-            var result = new Object;
             result["ENDORSEMENT"] = [];
             result["MVCC"] = [];
             result["PHANTOM"] = [];
@@ -126,6 +126,27 @@ getChannel(channelName).then((network)=>{
     app.get("/height", (req, res) => { 
         res.json({"status": "0", "height": "" + height});
     });
+
+    app.get("/valid", (req, res) => { 
+        const valid = blkTxns[blkNum].length;
+        res.json({"status": "0", "VALID": "" + valid});
+    });
+
+    app.get("/endorsement", (req, res) => { 
+        const endorsement = result["ENDORSEMENT"].length;
+        res.json({"status": "0", "ENDORSEMENT": "" + endorsement});
+    });
+
+    app.get("/mvcc", (req, res) => { 
+        const mvcc = result["MVCC"].length;
+        res.json({"status": "0", "MVCC": "" + mvcc});
+    });
+
+    app.get("/phantom", (req, res) => { 
+        const phantom = result["PHANTOM"].length;
+        res.json({"status": "0", "PHANTOM": "" + phantom});
+    });
+
 }).catch((error)=>{
     console.error(`Failed to set up the contract and channel: ${error}`);
     process.exit(1);
