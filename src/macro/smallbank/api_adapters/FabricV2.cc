@@ -73,12 +73,12 @@ std::vector<std::string> FabricV2::poll_tx(int block_number) {
   } else {
     std::vector<std::string> txns = get_list_field(r, "txns");
     std::vector<std::string> trimedTxns;
-    // std::cout << "Block " << block_number << " has txns: " << std::endl;
+    std::cout << "Block " << block_number << " has txns: " << std::endl;
     for (auto i = txns.begin(); i != txns.end(); ++i) {
       // remove the surrounding "" and the last whitespace
       std::string trimed = (*i).substr(1, i->length()-2); 
       trimedTxns.push_back(trimed);
-      // std::cout << "\t[" << trimed << "]" << std::endl;
+      std::cout << "\t[" << trimed << "]" << std::endl;
     }
     return trimedTxns;
   }

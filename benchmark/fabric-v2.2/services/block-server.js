@@ -94,10 +94,6 @@ getChannel(channelName).then((network)=>{
                         result["PHANTOM"].push(channel_header.tx_id)
                         break;
                 }
-
-                /*if (tx_filters[index] === 0) {
-                    blkTxns[blkNum].push(channel_header.tx_id)
-                } */
             }
             console.log(`Block ${blkNum} has TXSUM=${txs_sum} VALID=${blkTxns[blkNum].length}, ENDORSEMENT=${result["ENDORSEMENT"].length}, MVCC=${result["MVCC"].length}, PHANTOM=${result["PHANTOM"].length} `);
 
