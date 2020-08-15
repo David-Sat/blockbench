@@ -24,11 +24,7 @@ const channelName = process.argv[2];
 const port = Number(process.argv[3]);
 var blkTxns = {};
 var height = 0;
-var result = {};
-result["VALID"] = [];
-result["ENDORSEMENT"] = [];
-result["MVCC"] = [];
-result["PHANTOM"] = [];
+var txArray = {};
 
 async function getChannel(channelName) {
     try {
@@ -76,30 +72,23 @@ getChannel(channelName).then((network)=>{
             const block = event.blockData;
             blkTxns[blkNum] = [];
             let tx_filters = block.metadata.metadata[2]
-
             var txs_sum = block.data.data.length;
+
+            txArray[blkNum] = new Array(20).fill(0);
 
             for (var index = 0; index < block.data.data.length; index++) {
                 var channel_header = block.data.data[index].payload.header.channel_header;
-                switch(tx_filters[index]) {
-                    case 0:
-                        blkTxns[blkNum].push(channel_header.tx_id)
-                        result["VALID"].push(channel_header.tx_id)
-                        break;
-                    case 10:
-                        result["ENDORSEMENT"].push(channel_header.tx_id)
-                        break;
-                    case 11:
-                        result["MVCC"].push(channel_header.tx_id)
-                        break;
-                    case 12:
-                        result["PHANTOM"].push(channel_header.tx_id)
-                        break;
+                
+                if (tx_filters[index] === 0) {
+                    blkTxns[blkNum].push(channel_header.tx_id);
+                    txArray[blkNum][0] += 1;
+                } else {
+                    if(tx_filters[index] < 16){
+                        txArray[blkNum][tx_filters[index]] += 1;
+                    }
                 }
             }
-            console.log(`Block ${blkNum} has TXSUM=${txs_sum} VALID=${result["VALID"].length}, ENDORSEMENT=${result["ENDORSEMENT"].length}, MVCC=${result["MVCC"].length}, PHANTOM=${result["PHANTOM"].length} `);
-
-            //console.log(`Block ${blkNum} has txns [${blkTxns[blkNum]}]. `);
+            console.log(`Block ${blkNum} has txns [${blkTxns[blkNum]}]. `);
 
         } catch (error) {
             console.error(`Failed to listen for blocks: ${error}`);
@@ -129,25 +118,16 @@ getChannel(channelName).then((network)=>{
         res.json({"status": "0", "height": "" + height});
     });
 
-    app.get("/valid", (req, res) => { 
-        const valid = blkTxns.length;
-        res.json({"status": "0", "VALID": valid});
+    app.get("/txcode", (req, res) => { 
+        const blkNum = "" + req.query.num; //convert to string
+        const txncodes = txArray[blkNum];
+        if (txncodes === undefined) {
+            res.json({"status": "1", "message": "Block " + blkNum + " does not exist. "});
+        } else {
+            res.json({"status": "0", "TxValidationCodes": txncodes});
+        }
     });
 
-    app.get("/endorsement", (req, res) => { 
-        const endorsement = result["ENDORSEMENT"].length;
-        res.json({"status": "0", "ENDORSEMENT": endorsement});
-    });
-
-    app.get("/mvcc", (req, res) => { 
-        const mvcc = result["MVCC"].length;
-        res.json({"status": "0", "MVCC": mvcc});
-    });
-
-    app.get("/phantom", (req, res) => { 
-        const phantom = result["PHANTOM"].length;
-        res.json({"status": "0", "PHANTOM": phantom});
-    });
 
 }).catch((error)=>{
     console.error(`Failed to set up the contract and channel: ${error}`);

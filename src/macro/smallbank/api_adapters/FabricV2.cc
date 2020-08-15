@@ -17,6 +17,7 @@ const std::string HEIGHT_END_POINT = "/height";
 const std::string BLOCK_END_POINT = "/block";
 const std::string INVOKE_END_POINT = "/invoke";
 const std::string QUERY_END_POINT = "/query";
+const std::string TXCODE_END_POINT = "/txcode";
 
 const std::string REQUEST_HEADERS = "application/json";
 
@@ -83,6 +84,32 @@ std::vector<std::string> FabricV2::poll_tx(int block_number) {
     return trimedTxns;
   }
 }
+
+std::vector<std::string> FabricV2::poll_tx_codes(int block_number) {
+  std::string serviceAddr;
+  this->addresses(&serviceAddr, NULL);
+  char buff[100];
+  std::sprintf(buff, "?num=%d", block_number);
+  std::string requestArg(buff);
+  auto r = RestClient::get(serviceAddr + TXCODE_END_POINT + requestArg).body;
+  if (get_json_field(r, "status") == "1") {
+    std::cerr << "Fail to read with error " 
+              << get_json_field(r, "message") << std::endl;
+    return std::vector<std::string>();
+  } else {
+    std::vector<std::string> txns = get_list_field(r, "TxValidationCodes");
+    std::vector<std::string> trimmedTxns;
+    // std::cout << "Block " << block_number << " has txns: " << std::endl;
+    for (auto i = txns.begin(); i != txns.end(); ++i) {
+      // remove the surrounding "" and the last whitespace
+      std::string trimed = (*i).substr(1, i->length()-2); 
+      trimmedTxns.push_back(trimed);
+      // std::cout << "\t[" << trimed << "]" << std::endl;
+    }
+    return trimmedTxns;
+  }
+}
+
 
 int FabricV2::get_tip_block_number() {
   std::string serviceAddr;

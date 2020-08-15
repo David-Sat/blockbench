@@ -93,8 +93,15 @@ int StatusThread(DB* sb, string dbname, string endpoint, double interval, int st
       sleep(interval); 
     while (cur_block_height + confirm_duration <= tip) {      
       vector<string> txs = sb->poll_tx(cur_block_height); 
+
+      vector<string> txcodes = sb->poll_tx_codes(cur_block_height);
+
       cout << "polled block " << cur_block_height << " : " << txs.size() 
-           << " txs " << endl; 
+           << " txs; " 
+           << "ENDORSEMENT: " << txcodes[10]
+           << "MVCC: " << txcodes[11]
+           << "PHANTOM: " << txcodes[12]
+           << endl; 
       cur_block_height++;           
       long block_time = time_now(); 
       txlock_.lock();

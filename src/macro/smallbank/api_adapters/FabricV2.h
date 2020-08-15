@@ -44,6 +44,7 @@ class FabricV2 : public DB {
 
   int get_tip_block_number();
   vector<string> poll_tx(int block_number);
+  vector<string> poll_tx_codes(int block_number); //added
  private:
   void InvokeWithOneArg(std::string funcName, std::string arg);
   void InvokeWithTwoArgs(std::string funcName, std::string arg1, std::string arg2);

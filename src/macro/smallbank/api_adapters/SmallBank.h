@@ -42,6 +42,7 @@ class SmallBank : public DB {
 
   int get_tip_block_number();
   vector<string> poll_tx(int block_number);
+  vector<string> poll_tx_codes(int block_number);
   int find_tip(string json);
   vector<string> find_tx(string json); 
   string get_json_field(const string &json, const string &key); 

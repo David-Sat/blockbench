@@ -44,6 +44,7 @@ class Fabric : public DB {
 
   int get_tip_block_number();
   vector<string> poll_tx(int block_number);
+  vector<string> poll_tx_codes(int block_number);
  private:
   void add_to_queue(string json); 
   std::string exec(const char* cmd);
