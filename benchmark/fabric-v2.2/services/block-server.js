@@ -25,6 +25,10 @@ const port = Number(process.argv[3]);
 var blkTxns = {};
 var height = 0;
 var result = {};
+result["VALID"] = [];
+result["ENDORSEMENT"] = [];
+result["MVCC"] = [];
+result["PHANTOM"] = [];
 
 async function getChannel(channelName) {
     try {
@@ -73,9 +77,6 @@ getChannel(channelName).then((network)=>{
             blkTxns[blkNum] = [];
             let tx_filters = block.metadata.metadata[2]
 
-            result["ENDORSEMENT"] = [];
-            result["MVCC"] = [];
-            result["PHANTOM"] = [];
             var txs_sum = block.data.data.length;
 
             for (var index = 0; index < block.data.data.length; index++) {
@@ -83,6 +84,7 @@ getChannel(channelName).then((network)=>{
                 switch(tx_filters[index]) {
                     case 0:
                         blkTxns[blkNum].push(channel_header.tx_id)
+                        result["VALID"].push(channel_header.tx_id)
                         break;
                     case 10:
                         result["ENDORSEMENT"].push(channel_header.tx_id)
@@ -95,7 +97,7 @@ getChannel(channelName).then((network)=>{
                         break;
                 }
             }
-            console.log(`Block ${blkNum} has TXSUM=${txs_sum} VALID=${blkTxns[blkNum].length}, ENDORSEMENT=${result["ENDORSEMENT"].length}, MVCC=${result["MVCC"].length}, PHANTOM=${result["PHANTOM"].length} `);
+            console.log(`Block ${blkNum} has TXSUM=${txs_sum} VALID=${result["VALID"].length}, ENDORSEMENT=${result["ENDORSEMENT"].length}, MVCC=${result["MVCC"].length}, PHANTOM=${result["PHANTOM"].length} `);
 
             //console.log(`Block ${blkNum} has txns [${blkTxns[blkNum]}]. `);
 
