@@ -46,6 +46,8 @@ class EVMDB : public DB {
 
   std::vector<std::string> PollTxn(int block_number);
 
+  std::vector<std::string> PollTxCodes(int block_number);
+
  private:
   std::unordered_map<std::string, double> *pendingtx_;
   SpinLock *txlock_;

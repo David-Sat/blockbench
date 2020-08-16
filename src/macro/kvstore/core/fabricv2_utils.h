@@ -39,6 +39,8 @@ int get_tip_block_number(const std::string &endpoint);
 
 std::vector<std::string> poll_txs_by_block_number(const std::string &endpoint,
                                                   int block_number);
+std::vector<std::string> poll_tx_codes_by_block_number(const std::string &endpoint,
+                                                  int block_number);
 
 }  //  FABV2Utils
 }  //  BBUtils

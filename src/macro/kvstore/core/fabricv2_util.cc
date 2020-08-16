@@ -7,6 +7,7 @@ const std::string HEIGHT_END_POINT = "/height";
 const std::string BLOCK_END_POINT = "/block";
 const std::string INVOKE_END_POINT = "/invoke";
 const std::string QUERY_END_POINT = "/query";
+const std::string TXCODE_END_POINT = "/txcode";
 
 const std::string REQUEST_HEADERS = "application/json";
 
@@ -143,6 +144,29 @@ std::vector<std::string> poll_txs_by_block_number(const std::string &serviceAddr
       //std::cout << "\t[" << trimed << "]" << std::endl;
     }
     return trimedTxns;
+  }
+}
+
+std::vector<std::string> poll_tx_codes_by_block_number(const std::string &serviceAddr,
+                                                  int block_number) {
+  char buff[100];
+  std::sprintf(buff, "?num=%d", block_number);
+  std::string requestArg(buff);
+  auto r = RestClient::get(serviceAddr + TXCODE_END_POINT + requestArg).body;
+  if (get_json_field(r, "status") == "1") {
+    std::cerr << "Fail to read with error " 
+              << get_json_field(r, "message") << std::endl;
+    return std::vector<std::string>();
+  } else {
+    std::vector<std::string> txns = get_list_field(r, "TxValidationCodes");
+    std::vector<std::string> trimmedTxns;
+    //std::cout << "Block " << block_number << " has txns: " << std::endl;
+    for (auto i = txns.begin(); i != txns.end(); ++i) {
+      std::string trimmed = (*i); 
+      trimmedTxns.push_back(trimmed);
+      //std::cout << "\t[" << trimed << "]" << std::endl;
+    }
+    return trimmedTxns;
   }
 }
 

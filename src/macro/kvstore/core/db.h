@@ -111,6 +111,7 @@ class DB {
   /// @return vector of transaction id in the requried block
   ///
   virtual std::vector<std::string> PollTxn(int block_number) = 0;
+  virtual std::vector<std::string> PollTxCodes(int block_number) = 0;
 
   virtual ~DB() {}
 };

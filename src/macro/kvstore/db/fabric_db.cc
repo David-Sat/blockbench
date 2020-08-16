@@ -121,4 +121,8 @@ vector<string> FabricDB::PollTxn(int block_number) {
   }
 }
 
+vector<string> FabricDB::PollTxCodes(int block_number) {
+  return vector<string>();
+}
+
 }  // ycsbc

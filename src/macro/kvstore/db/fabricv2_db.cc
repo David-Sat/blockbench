@@ -78,4 +78,10 @@ vector<string> FabricV2DB::PollTxn(int block_number) {
   return poll_txs_by_block_number(blkServiceAddr, block_number);
 }
 
+vector<string> FabricV2DB::PollTxCodes(int block_number) {
+  std::string blkServiceAddr;
+  this->addresses(&blkServiceAddr, NULL);
+  return poll_tx_codes_by_block_number(blkServiceAddr, block_number);
+}
+
 }  // ycsbc

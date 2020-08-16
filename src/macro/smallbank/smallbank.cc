@@ -106,9 +106,9 @@ int StatusThread(DB* sb, string dbname, string endpoint, double interval, int st
 
       cout << "polled block " << cur_block_height << " : " << txs.size() 
            << " txs; " 
-           << "VALID: " << txcodes[0] << ", "
-           << "ENDORSEMENT: " << txcodes[10] << ", "
-           << "MVCC: " << txcodes[11] << ", "
+           << "VALID: " << txcodes[0] << "  "
+           << "ENDORSEMENT: " << txcodes[10] << "  "
+           << "MVCC: " << txcodes[11] << "  "
            << "PHANTOM: " << txcodes[12]
            << endl; 
       cur_block_height++;           
@@ -130,7 +130,7 @@ int StatusThread(DB* sb, string dbname, string endpoint, double interval, int st
     cout << "In the last "<< interval <<"s, tx count = " << txcount
          << " latency = " << latency/1000000000.0 
          << " outstanding request = " << pendingtx.size() 
-        << "V: " << val << ", "
+        << "   V: " << val << ", "
         << "E: " << end << ", "
         << "M: " << mvcc << ", "
         << "P: " << pha

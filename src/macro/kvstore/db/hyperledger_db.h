@@ -44,6 +44,8 @@ class HyperLedgerDB : public DB {
 
   std::vector<std::string> PollTxn(int block_number);
 
+  std::vector<std::string> PollTxCodes(int block_number);
+
  private:
   std::string endpoint_;
   std::unordered_map<std::string, double> *pendingtx_;

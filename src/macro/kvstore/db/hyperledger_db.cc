@@ -66,4 +66,8 @@ vector<string> HyperLedgerDB::PollTxn(int block_number) {
   return poll_txs_by_block_number(endpoint_, block_number);
 }
 
+vector<string> HyperLedgerDB::PollTxCodes(int block_number) {
+  return poll_txs_by_block_number(endpoint_, block_number);
+}
+
 }  // ycsbc

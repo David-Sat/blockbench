@@ -43,6 +43,7 @@ class FabricDB : public DB {
   int GetTip();
 
   std::vector<std::string> PollTxn(int block_number);
+  std::vector<std::string> PollTxCodes(int block_number);
 
  private:
   inline void addresses(std::string* ordererAddr, std::string* peerAddr) {

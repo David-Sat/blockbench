@@ -46,6 +46,8 @@ class FabricV2DB : public DB {
 
   std::vector<std::string> PollTxn(int block_number);
 
+  std::vector<std::string> PollTxCodes(int block_number);
+
  private:
   inline void addresses(std::string* blkServiceAddr, std::vector<std::string>* txnServiceAddrs) {
     // std::cout << "endpoint: " << this->endpoint_ << std::endl;
