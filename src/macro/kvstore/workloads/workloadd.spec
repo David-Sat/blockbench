@@ -12,7 +12,7 @@
 # workload here (which we believe is more typical of how people build systems.)
 
 recordcount=10000
-operationcount=10000
+operationcount=100000
 workload=ycsb
 
 readallfields=true

@@ -7,7 +7,7 @@
 #   Request distribution: zipfian
 
 recordcount=10000
-operationcount=10000
+operationcount=100000
 workload=ycsb
 
 readallfields=true
