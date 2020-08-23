@@ -717,7 +717,7 @@ operations:
 ###############################################################################
 metrics:
     # metrics provider is one of statsd, prometheus, or disabled
-    provider: disabled
+    provider: statsd
 
     # statsd configuration
     statsd:

@@ -323,7 +323,7 @@ Operations:
 ################################################################################
 Metrics:
     # The metrics provider is one of statsd, prometheus, or disabled
-    Provider: disabled
+    Provider: statsd
 
     # The statsd configuration
     Statsd:
