@@ -88,7 +88,8 @@ getChannel(channelName).then((network)=>{
                     }
                 }
             }
-            console.log(`Block ${blkNum} has txns [${blkTxns[blkNum]}]. `);
+            //console.log(`Block ${blkNum} has txns [${blkTxns[blkNum]}]. `);
+            console.log(`Block ${blkNum} has txncodes [${txArray[blkNum]}]. `);
 
         } catch (error) {
             console.error(`Failed to listen for blocks: ${error}`);
