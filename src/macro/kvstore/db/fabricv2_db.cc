@@ -44,9 +44,9 @@ int FabricV2DB::Update(const string &table, const string &key,
   std::string txn_hash = (sctype_ == BBUtils::SmartContractType::DoNothing)
                              ? submit_do_nothing_txn(txnServiceAddrs[i])
                              : submit_set_txn(txnServiceAddrs[i], key, val);
-  txlock_->lock();
+  //txlock_->lock();
   (*pendingtx_)[txn_hash] = utils::time_now();
-  txlock_->unlock();
+  //txlock_->unlock();
   return DB::kOK;
 }
 

@@ -39,9 +39,9 @@ int EVMDB::Read(const string &table, const string &key,
       (sctype_ == BBUtils::SmartContractType::DoNothing)
           ? submit_do_nothing_txn(endpoint_, from_address_, to_address_)
           : submit_get_txn(endpoint_, key, from_address_, to_address_);
-  //txlock_->lock();
+  txlock_->lock();
   (*pendingtx_)[txn_hash] = start_time;
-  //txlock_->unlock();
+  txlock_->unlock();
   return DB::kOK;
 }
 
@@ -60,9 +60,9 @@ int EVMDB::Update(const string &table, const string &key,
       (sctype_ == BBUtils::SmartContractType::DoNothing)
           ? submit_do_nothing_txn(endpoint_, from_address_, to_address_)
           : submit_set_txn(endpoint_, key, val, from_address_, to_address_);
-  //txlock_->lock();
+  txlock_->lock();
   (*pendingtx_)[txn_hash] = start_time;
-  //txlock_->unlock();
+  txlock_->unlock();
 
   return DB::kOK;
 }
