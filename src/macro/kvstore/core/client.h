@@ -14,6 +14,8 @@
 #include "core_workload.h"
 #include "utils.h"
 
+#include<iostream>
+
 namespace ycsbc {
 
 class Client {
@@ -38,7 +40,7 @@ class Client {
 };
 
 inline bool Client::DoInsert() {
-  cout << "Calls DoInsert()" << endl;
+  std::cout << "Calls DoInsert()" << std::endl;
   std::string key = workload_.NextSequenceKey();
   std::vector<DB::KVPair> pairs;
   workload_.BuildValues(pairs);
@@ -49,23 +51,23 @@ inline bool Client::DoTransaction() {
   int status = -1;
   switch (workload_.NextOperation()) {
     case READ:
-      cout << "Calls TransactionRead()" << endl;
+      std::cout << "Calls TransactionRead()" << std::endl;
       status = TransactionRead();
       break;
     case UPDATE:
-      cout << "Calls TransactionUpdate()" << endl;
+      std::cout << "Calls TransactionUpdate()" << std::endl;
       status = TransactionUpdate();
       break;
     case INSERT:
-      cout << "Calls TransactionInsert()" << endl;
+      std::cout << "Calls TransactionInsert()" << std::endl;
       status = TransactionInsert();
       break;
     case SCAN:
-      cout << "Calls TransactionScan()" << endl;
+      std::cout << "Calls TransactionScan()" << std::endl;
       status = TransactionScan();
       break;
     case READMODIFYWRITE:
-      cout << "Calls TransactionReadModifyWrite()" << endl;
+      std::cout << "Calls TransactionReadModifyWrite()" << std::endl;
       status = TransactionReadModifyWrite();
       break;
     default:
