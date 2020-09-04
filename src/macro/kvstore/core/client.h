@@ -38,6 +38,7 @@ class Client {
 };
 
 inline bool Client::DoInsert() {
+  cout << "Calls DoInsert()" << endl;
   std::string key = workload_.NextSequenceKey();
   std::vector<DB::KVPair> pairs;
   workload_.BuildValues(pairs);
@@ -48,18 +49,23 @@ inline bool Client::DoTransaction() {
   int status = -1;
   switch (workload_.NextOperation()) {
     case READ:
+      cout << "Calls TransactionRead()" << endl;
       status = TransactionRead();
       break;
     case UPDATE:
+      cout << "Calls TransactionUpdate()" << endl;
       status = TransactionUpdate();
       break;
     case INSERT:
+      cout << "Calls TransactionInsert()" << endl;
       status = TransactionInsert();
       break;
     case SCAN:
+      cout << "Calls TransactionScan()" << endl;
       status = TransactionScan();
       break;
     case READMODIFYWRITE:
+      cout << "Calls TransactionReadModifyWrite()" << endl;
       status = TransactionReadModifyWrite();
       break;
     default:

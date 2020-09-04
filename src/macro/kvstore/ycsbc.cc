@@ -45,11 +45,11 @@ int DelegateClient(ycsbc::DB *db, ycsbc::CoreWorkload *wl, const int num_ops,
   double tx_sleep_time = 1.0 / txrate;
   for (int i = 0; i < num_ops; ++i) {
     if (is_loading) {
-      cout << "Calls DoInsert()" << endl;
+      //cout << "Calls DoInsert()" << endl;
       oks += client.DoInsert();
       utils::sleep(tx_sleep_time);
     } else {
-      cout << "Calls DoTransacation()" << endl;
+      //cout << "Calls DoTransacation()" << endl;
       oks += client.DoTransaction();
     }
   }
