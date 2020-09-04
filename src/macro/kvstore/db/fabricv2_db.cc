@@ -22,7 +22,6 @@ FabricV2DB::FabricV2DB(const string &endpoint, const string &wl_name)
 int FabricV2DB::Read(const string &table, const string &key,
                         const vector<string> *fields, vector<KVPair> &result) {
 
-  /*
   std::string blkServiceAddr;
   std::vector<std::string> txnServiceAddrs;
   this->addresses(&blkServiceAddr, &txnServiceAddrs);
@@ -33,7 +32,6 @@ int FabricV2DB::Read(const string &table, const string &key,
   txlock_->lock();
   (*pendingtx_)[txn_hash] = utils::time_now();
   txlock_->unlock();
-  */
   return DB::kOK;
 }
 
