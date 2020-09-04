@@ -181,15 +181,38 @@ int main(const int argc, const char *argv[]) {
                                   total_ops / num_threads, true, txrate));
   }
 
-  actual_ops.emplace_back(async(launch::async, StatusThread, props["dbname"],
-                                db, BLOCK_POLLING_INTERVAL, current_tip));
 
   int sum = 0;
   for (auto &n : actual_ops) {
     assert(n.valid());
     sum += n.get();
   }
+  cout << "# Loading records:\t" << sum << endl;
   cerr << "# Loading records:\t" << sum << endl;
+
+  // Peforms transactions
+  actual_ops.clear();
+  total_ops = stoi(props[ycsbc::CoreWorkload::OPERATION_COUNT_PROPERTY]);
+  utils::Timer<double> timer;
+  timer.Start();
+  for (int i = 0; i < num_threads; ++i) {
+    actual_ops.emplace_back(async(launch::async, DelegateClient, db, &wl, 
+                                  total_ops / num_threads, false, txrate));
+  }
+
+  actual_ops.emplace_back(async(launch::async, StatusThread, props["dbname"],
+                                db, BLOCK_POLLING_INTERVAL, current_tip));
+
+  sum = 0;
+  for (auto &n : actual_ops) {
+    assert(n.valid());
+    sum += n.get();
+  }
+  double duration = timer.End();
+  cout << "# Transaction throughput (KTPS)" << endl;
+  cout << props["dbname"] << '\t' << file_name << '\t' << num_threads << '\t';
+  cout << total_ops / duration / 1000 << endl;
+
 }
 
 string ParseCommandLine(int argc, const char *argv[],
