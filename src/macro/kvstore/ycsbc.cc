@@ -76,6 +76,11 @@ int StatusThread(string dbname, ycsbc::DB *db, double interval,
     confirm_duration = HL_CONFIRM_BLOCK_LENGTH;
 
   while (true) {
+    if(cur_block_height == 10){
+      break;
+    }
+
+
     start_time = utils::time_now();
     int tip = db->GetTip();
     int val = 0;
