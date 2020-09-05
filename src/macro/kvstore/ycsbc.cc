@@ -76,10 +76,6 @@ int StatusThread(string dbname, ycsbc::DB *db, double interval,
     confirm_duration = HL_CONFIRM_BLOCK_LENGTH;
 
   while (true) {
-    if(cur_block_height >= 10){
-      break;
-    }
-
 
     start_time = utils::time_now();
     int tip = db->GetTip();
@@ -179,14 +175,17 @@ int main(const int argc, const char *argv[]) {
   utils::Timer<double> stat_timer;
 
   // Loads data
-  vector<future<int>> actual_ops;
+  //vector<future<int>> actual_ops;
+  vector<thread> actual_ops;
   int total_ops = stoi(props[ycsbc::CoreWorkload::RECORD_COUNT_PROPERTY]);
   for (int i = 0; i < num_threads; ++i) {
-    actual_ops.emplace_back(async(launch::async, DelegateClient, db, &wl,
-                                  total_ops / num_threads, true, txrate));
+    actual_ops.emplace_back(DelegateClient, db, &wl,
+                                  total_ops / num_threads, true, txrate);
   }
 
+  for (auto& th : actual_ops) th.join();
 
+  /*
   int sum = 0;
   for (auto &n : actual_ops) {
     assert(n.valid());
@@ -194,6 +193,7 @@ int main(const int argc, const char *argv[]) {
   }
   cout << "# Loading records:\t" << sum << endl;
   cerr << "# Loading records:\t" << sum << endl;
+  */
 
   // Peforms transactions
   actual_ops.clear();
@@ -201,18 +201,20 @@ int main(const int argc, const char *argv[]) {
   utils::Timer<double> timer;
   timer.Start();
   for (int i = 0; i < num_threads; ++i) {
-    actual_ops.emplace_back(async(launch::async, DelegateClient, db, &wl, 
-                                  total_ops / num_threads, false, txrate));
+    actual_ops.emplace_back(DelegateClient, db, &wl, 
+                                  total_ops / num_threads, false, txrate);
   }
 
-  actual_ops.emplace_back(async(launch::async, StatusThread, props["dbname"],
-                                db, BLOCK_POLLING_INTERVAL, current_tip));
+  actual_ops.emplace_back(StatusThread, props["dbname"],
+                                db, BLOCK_POLLING_INTERVAL, current_tip);
 
+  /*
   sum = 0;
   for (auto &n : actual_ops) {
     assert(n.valid());
     sum += n.get();
   }
+  */
   double duration = timer.End();
   cout << "# Transaction throughput (KTPS)" << endl;
   cout << props["dbname"] << '\t' << file_name << '\t' << num_threads << '\t';
