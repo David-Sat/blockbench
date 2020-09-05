@@ -175,16 +175,14 @@ int main(const int argc, const char *argv[]) {
   utils::Timer<double> stat_timer;
 
   // Loads data
-  //vector<future<int>> actual_ops;
-  vector<thread> actual_ops;
+  vector<future<int>> actual_ops;
   int total_ops = stoi(props[ycsbc::CoreWorkload::RECORD_COUNT_PROPERTY]);
   for (int i = 0; i < num_threads; ++i) {
-    actual_ops.emplace_back(DelegateClient, db, &wl,
-                                  total_ops / num_threads, true, txrate);
+    actual_ops.emplace_back(async(launch::async, DelegateClient, db, &wl,
+                                  total_ops / num_threads, true, txrate));
   }
 
-  for (auto& th : actual_ops) th.join();
-
+  
   /*
   int sum = 0;
   for (auto &n : actual_ops) {
@@ -196,20 +194,25 @@ int main(const int argc, const char *argv[]) {
   */
 
   // Peforms transactions
-  //actual_ops.clear();
+  actual_ops.clear();
+
+  vector<thread> threads;
+
   total_ops = stoi(props[ycsbc::CoreWorkload::OPERATION_COUNT_PROPERTY]);
   utils::Timer<double> timer;
   timer.Start();
   for (int i = 0; i < num_threads; ++i) {
-    actual_ops.emplace_back(DelegateClient, db, &wl, 
+    threads.emplace_back(DelegateClient, db, &wl, 
                                   total_ops / num_threads, false, txrate);
   }
 
-  actual_ops.emplace_back(StatusThread, props["dbname"],
+  threads.emplace_back(StatusThread, props["dbname"],
                                 db, BLOCK_POLLING_INTERVAL, current_tip);
 
 
-  for (auto& th : actual_ops) th.join();
+  for (auto& th : threads) th.join();
+
+
   /*
   sum = 0;
   for (auto &n : actual_ops) {
