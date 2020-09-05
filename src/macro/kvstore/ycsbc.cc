@@ -196,7 +196,7 @@ int main(const int argc, const char *argv[]) {
   */
 
   // Peforms transactions
-  actual_ops.clear();
+  //actual_ops.clear();
   total_ops = stoi(props[ycsbc::CoreWorkload::OPERATION_COUNT_PROPERTY]);
   utils::Timer<double> timer;
   timer.Start();
@@ -208,6 +208,8 @@ int main(const int argc, const char *argv[]) {
   actual_ops.emplace_back(StatusThread, props["dbname"],
                                 db, BLOCK_POLLING_INTERVAL, current_tip);
 
+
+  for (auto& th : actual_ops) th.join();
   /*
   sum = 0;
   for (auto &n : actual_ops) {
