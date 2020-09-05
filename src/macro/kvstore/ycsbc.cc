@@ -39,7 +39,7 @@ utils::Timer<double> stat_timer;
 
 int DelegateClient(ycsbc::DB *db, ycsbc::CoreWorkload *wl, const int num_ops,
                    bool is_loading, const int txrate) {
-  db->Init();
+  //db->Init();
   ycsbc::Client client(*db, *wl);
   int oks = 0;
   double tx_sleep_time = 1.0 / txrate;
