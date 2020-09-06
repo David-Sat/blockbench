@@ -117,7 +117,7 @@ getChannel(channelName, contractName).then((contract)=>{
         });
     });
 
-    app.get("/query", (req, res) => { 
+    app.post("/query", (req, res) => { 
         console.log(`start of /query`);
         //const funcName = req.query.function;
         //const args = req.query.args.split(',');
