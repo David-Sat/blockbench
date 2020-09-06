@@ -53,7 +53,7 @@ int DelegateClient(ycsbc::DB *db, ycsbc::CoreWorkload *wl, const int num_ops,
       oks += client.DoTransaction();
     }
   }
-  db->Close();
+  //db->Close();
   return oks;
 }
 
