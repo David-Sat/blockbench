@@ -81,7 +81,7 @@ std::string submit_get_txn(const std::string &serviceAddr,
   //char buff[100 + key.length()];
   //std::sprintf(buff, "?function=%s", key.c_str());
   std::string requestArg(buff);
-  std::cout << QUERY_END_POINT << requestArg << std::endl;
+  std::cout << serviceAddr << QUERY_END_POINT << requestArg << std::endl;
   //comment
   auto r = RestClient::get(serviceAddr + QUERY_END_POINT + requestArg).body;
   if (get_json_field(r, "status") == "1") {
@@ -95,7 +95,7 @@ std::string submit_get_txn(const std::string &serviceAddr,
 
 std::string submit_set_txn(const std::string &serviceAddr, const std::string &key, const std::string &val) {
   std::string writeReq = compose_write(key, val);
-  std::cout << INVOKE_END_POINT << writeReq << std::endl;
+  std::cout << serviceAddr << INVOKE_END_POINT << writeReq << std::endl;
   //comment
   auto r = RestClient::post(serviceAddr + INVOKE_END_POINT, 
                                 REQUEST_HEADERS,
