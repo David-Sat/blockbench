@@ -111,14 +111,14 @@ getChannel(channelName, contractName).then((contract)=>{
             var end = new Date() - start
             const txnID = txn.getTransactionId();
             res.json({"status": "0", "txnID": txnID, "latency_ms": end});
+            console.log(`Result of ${funcName}: ${txnID}; latency: ${end}`);
         }).catch((error)=>{
             console.error(`Failed to invoke with error: ${error}`);
             res.json({"status": "1", "message": error.message});
         });
     });
 
-    app.post("/query", (req, res) => { 
-        console.log(`start of /query`);
+    app.post("/query", (req, res) => {
         //const funcName = req.query.function;
         //const args = req.query.args.split(',');
         const funcName = req.body["function"];
@@ -132,6 +132,7 @@ getChannel(channelName, contractName).then((contract)=>{
         }).then((result)=>{
             var end = new Date() - start
             res.json({"status": "0", "result": result.toString(), "latency_ms": end});
+            console.log(`Result of ${funcName}, ${args}: ${result.toString()}; latency: ${end}`);
         }).catch((error)=>{
             console.error(`Failed to query with error: ${error}`);
             res.json({"status": "1", "message": error.message});
