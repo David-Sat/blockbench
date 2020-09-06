@@ -119,10 +119,10 @@ getChannel(channelName, contractName).then((contract)=>{
 
     app.get("/query", (req, res) => { 
         console.log(`start of /query`);
-        const funcName = req.query.function;
-        const args = req.query.args.split(',');
-        //const funcName = req.body["function"];
-        //const args = req.body["args"];
+        //const funcName = req.query.function;
+        //const args = req.query.args.split(',');
+        const funcName = req.body["function"];
+        const args = req.body["args"];
 
         console.log(`Receive funcName: ${funcName}, args: ${args}`);
         var start; 

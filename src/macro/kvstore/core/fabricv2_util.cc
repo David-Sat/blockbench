@@ -83,7 +83,9 @@ std::string submit_get_txn(const std::string &serviceAddr,
   std::string requestArg(buff);
   std::cout << serviceAddr << QUERY_END_POINT << requestArg << std::endl;
   //comment
-  auto r = RestClient::get(serviceAddr + QUERY_END_POINT + requestArg).body;
+  auto r = RestClient::post(serviceAddr + QUERY_END_POINT,
+                                REQUEST_HEADERS,
+                                requestArg).body;
   if (get_json_field(r, "status") == "1") {
     std::cerr << "Fail to read with error " 
               << get_json_field(r, "message") << std::endl;
