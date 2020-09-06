@@ -27,6 +27,12 @@ const std::string INVOKE_DONOTHING_COMMAND =
     "{\
   \"function\": \"Write\", \
   \"args\": [\"%s\", \"%s\"] \
+  }";
+
+  const char* READ_KV_COMMAND_TEMPLATE =
+    "{\
+  \"function\": \"Read\", \
+  \"args\": [\"%s\"] \
   }"; 
 
 std::string compose_write(const std::string &key, const std::string &val) {
@@ -69,8 +75,11 @@ std::string submit_do_nothing_txn(const std::string &serviceAddr) {
 
 std::string submit_get_txn(const std::string &serviceAddr,
                            const std::string &key) {
-  char buff[100 + key.length()];
-  std::sprintf(buff, "?function=%s", key.c_str());
+  char buff[200 + key.length()];
+  std::sprintf(buff, READ_KV_COMMAND_TEMPLATE, key.c_str());
+
+  //char buff[100 + key.length()];
+  //std::sprintf(buff, "?function=%s", key.c_str());
   std::string requestArg(buff);
   std::cout << QUERY_END_POINT << requestArg << std::endl;
   //comment
