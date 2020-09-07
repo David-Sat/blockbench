@@ -201,6 +201,7 @@ int main(const int argc, const char *argv[]) {
   total_ops = stoi(props[ycsbc::CoreWorkload::OPERATION_COUNT_PROPERTY]);
   utils::Timer<double> timer;
   timer.Start();
+  stat_timer.Tic();
   for (int i = 0; i < num_threads; ++i) {
     threads.emplace_back(DelegateClient, db, &wl, 
                                   total_ops / num_threads, false, txrate);
