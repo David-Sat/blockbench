@@ -83,7 +83,7 @@ std::string submit_get_txn(const std::string &serviceAddr,
   std::string requestArg(buff);
   std::cout << serviceAddr << QUERY_END_POINT << requestArg << std::endl;
   //comment
-  auto r = RestClient::post(serviceAddr + QUERY_END_POINT,
+  auto r = RestClient::post(serviceAddr + INVOKE_END_POINT,
                                 REQUEST_HEADERS,
                                 requestArg).body;
   if (get_json_field(r, "status") == "1") {
