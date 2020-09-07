@@ -113,7 +113,7 @@ inline std::string left_padding_string(const std::string &str) {
 inline std::string send_jsonrpc_request(const std::string &endpoint,
                                         const std::string &request_header,
                                         const std::string &request_data) {
-  std::cout << "Result: " << request_data << std::endl;
+  //std::cout << "Result: " << request_data << std::endl;
   //comment                                        
   return RestClient::post(endpoint, request_header, request_data).body;
 }
