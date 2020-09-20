@@ -60,7 +60,7 @@ int DelegateClient(ycsbc::DB *db, ycsbc::CoreWorkload *wl, const int num_ops,
 // wakeup every interval second to poll,
 // when first started, the block height is start_block_height
 int StatusThread(string dbname, ycsbc::DB *db, double interval,
-                 int start_block_height) {
+                 int start_block_height, utils::Timer<double> timer) {
   int cur_block_height = start_block_height;
 
   long start_time;
@@ -128,13 +128,16 @@ int StatusThread(string dbname, ycsbc::DB *db, double interval,
       }
       txlock.unlock();
     }
+    double duration = timer.End();
+    
     cout << "In the last " << interval << "s, tx count = " << txcount
          << " latency = " << latency / 1000000000.0
          << " outstanding request = " << pendingtx.size() 
          << "   V: " << val << ", "
          << "E: " << end << ", "
          << "M: " << mvcc << ", "
-         << "P: " << pha
+         << "P: " << pha << ", "
+         << "s: " << duration
          << endl;
     txcount = 0;
     latency = 0;
@@ -208,7 +211,7 @@ int main(const int argc, const char *argv[]) {
   }
 
   threads.emplace_back(StatusThread, props["dbname"],
-                                db, BLOCK_POLLING_INTERVAL, current_tip);
+                                db, BLOCK_POLLING_INTERVAL, current_tip, timer);
 
 
   for (auto& th : threads) th.join();
