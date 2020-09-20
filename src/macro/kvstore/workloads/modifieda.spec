@@ -6,8 +6,8 @@
 #   Default data size: 1 KB records (10 fields, 100 bytes each, plus key)
 #   Request distribution: zipfian
 
-recordcount=200
-operationcount=100000
+recordcount=80
+operationcount=100
 workload=ycsb
 
 readallfields=true

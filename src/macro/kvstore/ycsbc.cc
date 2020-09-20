@@ -225,6 +225,7 @@ int main(const int argc, const char *argv[]) {
   cout << "# Transaction throughput (KTPS)" << endl;
   cout << props["dbname"] << '\t' << file_name << '\t' << num_threads << '\t';
   cout << total_ops / duration / 1000 << endl;
+  cout << "benchmark duration: " << duration << endl;
 
 }
 
