@@ -458,7 +458,8 @@ CC_INIT_FCN="NA"
 # use this as the default docker-compose yaml definition
 COMPOSE_FILE_BASE=docker/docker-compose-test-net.yaml
 # docker-compose.yaml file if you are using couchdb
-COMPOSE_FILE_COUCH=docker/docker-compose-couch.yaml
+#COMPOSE_FILE_COUCH=docker/docker-compose-couch.yaml
+COMPOSE_FILE_COUCH=docker/docker-compose-test-net.yaml
 # certificate authorities compose file
 COMPOSE_FILE_CA=docker/docker-compose-ca.yaml
 # use this as the docker compose couch file for org3
