@@ -41,7 +41,7 @@ std::unordered_map<string, double> pendingtx;
 
 void ClientThread(DB* sb, const int num_ops, const int txrate) {
   UniformGenerator op_gen(1, 6);
-  UniformGenerator acc_gen(1, 100000);
+  UniformGenerator acc_gen(1, 1000);
   UniformGenerator bal_gen(1, 10);
   double tx_sleep_time = 1.0 / txrate;
   for (int i = 0; i < num_ops; ++i) {
@@ -72,7 +72,8 @@ void ClientThread(DB* sb, const int num_ops, const int txrate) {
   }
 }
 
-int StatusThread(DB* sb, string dbname, string endpoint, double interval, int start_block_height){
+int StatusThread(DB* sb, string dbname, string endpoint, double interval, 
+                int start_block_height, Timer<double> timer){
   int cur_block_height = start_block_height;
   long start_time;
   long end_time;
@@ -127,6 +128,8 @@ int StatusThread(DB* sb, string dbname, string endpoint, double interval, int st
       }
       txlock_.unlock(); 
     }
+    double duration = timer.End();
+
     cout << "In the last "<< interval <<"s, tx count = " << txcount
          << " latency = " << latency/1000000000.0 
          << " outstanding request = " << pendingtx.size() 
@@ -134,6 +137,7 @@ int StatusThread(DB* sb, string dbname, string endpoint, double interval, int st
         << "E: " << end << ", "
         << "M: " << mvcc << ", "
         << "P: " << pha
+        << "s: " << duration
         << endl;  
     txcount = 0; 
     latency = 0; 
@@ -190,7 +194,8 @@ int main(const int argc, const char* argv[]) {
   for (int i = 0; i < thread_num; ++i) {
     threads.emplace_back(ClientThread, sb, total_ops / thread_num, txrate);
   }
-  threads.emplace_back(StatusThread, sb, props["dbname"], props["endpoint"], BLOCK_POLLING_INTERVAL, current_tip);
+  threads.emplace_back(StatusThread, sb, props["dbname"], props["endpoint"], 
+                                BLOCK_POLLING_INTERVAL, current_tip, timer);
 
 
   for (auto& th : threads) th.join();
