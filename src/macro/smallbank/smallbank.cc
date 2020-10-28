@@ -41,7 +41,8 @@ std::unordered_map<string, double> pendingtx;
 
 void ClientThread(DB* sb, const int num_ops, const int txrate) {
   UniformGenerator op_gen(1, 6);
-  UniformGenerator acc_gen(1, 1000);
+  int range = 1000;
+  UniformGenerator acc_gen(1, range);
   UniformGenerator bal_gen(1, 10);
   double tx_sleep_time = 1.0 / txrate;
   for (int i = 0; i < num_ops; ++i) {
