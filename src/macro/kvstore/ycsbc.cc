@@ -51,6 +51,7 @@ int DelegateClient(ycsbc::DB *db, ycsbc::CoreWorkload *wl, const int num_ops,
     } else {
       //cout << "Calls DoTransacation()" << endl;
       oks += client.DoTransaction();
+      utils::sleep(tx_sleep_time);
     }
   }
   //db->Close();
