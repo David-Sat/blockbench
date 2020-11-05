@@ -21,6 +21,25 @@ FabricDB::FabricDB(const string &endpoint, const string &wl_name)
 // read value indicated by a key
 int FabricDB::Read(const string &table, const string &key,
                         const vector<string> *fields, vector<KVPair> &result) {
+                          string orderer, peer, cmd;
+  addresses(&orderer, &peer);
+  if (sctype_ == BBUtils::SmartContractType::DoNothing) {
+    cmd = "node fabric-v1.4-node/invoke_donothing.js "  + orderer + " " + peer;
+  } else {
+    cmd = "node fabric-v1.4-node/invoke_kv.js "  + orderer + " " + peer;
+    cmd += " read " + key;
+  }
+
+  std::string result2 = exec(cmd.c_str());
+
+  if (json_field(result2, "status") != "ok") {
+    return DB::kErrorNoData;
+  }
+  string txn_hash = json_field(result2, "txID"); 
+  txlock_->lock();
+  (*pendingtx_)[txn_hash] = utils::time_now();
+  txlock_->unlock();
+
   return DB::kOK;
 }
 
