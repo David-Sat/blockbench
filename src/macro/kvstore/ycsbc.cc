@@ -91,19 +91,19 @@ int StatusThread(string dbname, ycsbc::DB *db, double interval,
     while (cur_block_height + confirm_duration <= tip) {
       vector<string> txs = db->PollTxn(cur_block_height);
 
-      // vector<string> txcodes = db->PollTxCodes(cur_block_height);
-      // val += std::stoi(txcodes[0]);
-      // end += std::stoi(txcodes[10]);
-      // mvcc += std::stoi(txcodes[11]);
-      // pha += std::stoi(txcodes[12]);
+      vector<string> txcodes = db->PollTxCodes(cur_block_height);
+      val += std::stoi(txcodes[0]);
+      end += std::stoi(txcodes[10]);
+      mvcc += std::stoi(txcodes[11]);
+      pha += std::stoi(txcodes[12]);
 
-      // cout << "polled block " << cur_block_height << " : " << txs.size()
-      //      << " txs " 
-      //      << "VALID: " << txcodes[0] << "  "
-      //      << "ENDORSEMENT: " << txcodes[10] << "  "
-      //      << "MVCC: " << txcodes[11] << "  "
-      //      << "PHANTOM: " << txcodes[12]
-      //      << endl;
+      cout << "polled block " << cur_block_height << " : " << txs.size()
+           << " txs " 
+           << "VALID: " << txcodes[0] << "  "
+           << "ENDORSEMENT: " << txcodes[10] << "  "
+           << "MVCC: " << txcodes[11] << "  "
+           << "PHANTOM: " << txcodes[12]
+           << endl;
 
       
       /*
@@ -134,10 +134,10 @@ int StatusThread(string dbname, ycsbc::DB *db, double interval,
     cout << "In the last " << interval << "s, tx count = " << txcount
          << " latency = " << latency / 1000000000.0
          << " outstanding request = " << pendingtx.size() 
-        //  << "   V: " << val << ", "
-        //  << "E: " << end << ", "
-        //  << "M: " << mvcc << ", "
-        //  << "P: " << pha << ", "
+         << "   V: " << val << ", "
+         << "E: " << end << ", "
+         << "M: " << mvcc << ", "
+         << "P: " << pha << ", "
          << "s: " << duration
          << endl;
     txcount = 0;
